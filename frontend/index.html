@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Resume Analyzer</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+  <h2>🚀 HireAI Dashboard</h2>
+</div>
+
+<div class="main">
+
+  <div class="left">
+    <div class="card">
+      <h3>📄 Upload Resume</h3>
+      <input type="file" id="resume">
+    </div>
+
+    <div class="card">
+      <h3>📝 Job Description</h3>
+      <textarea id="jd" placeholder="Paste job description..."></textarea>
+    </div>
+
+    <button onclick="analyze()">Analyze Resume</button>
+  </div>
+
+  <div class="right">
+    <div class="result-card">
+      <h2>ATS Score</h2>
+      <div id="score" class="score">--%</div>
+    </div>
+
+    <div class="result-card">
+      <h3>Missing Skills</h3>
+      <p id="missing">--</p>
+    </div>
+
+    <div class="result-card">
+      <h3>AI Feedback</h3>
+      <p id="feedback">--</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
