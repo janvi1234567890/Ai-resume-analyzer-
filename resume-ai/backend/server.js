@@ -1,9 +1,9 @@
-
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
+const path = require("path"); // 🔥 moved to top
 
 const app = express();
 app.use(cors());
@@ -30,11 +30,7 @@ function normalize(word) {
 
 function getWords(text) {
   text = text.toLowerCase();
-
-  // phrase fix
   text = text.replace(/machine learning/g, "machinelearning");
-
-  // special characters remove
   text = text.replace(/[^a-z0-9\s]/g, " ");
 
   return text
@@ -83,21 +79,19 @@ app.post("/analyze", upload.single("resume"), async (req, res) => {
 
     const resumeSet = new Set(resumeWords);
 
-jdWords.forEach(word => {
-  if (resumeSet.has(word)) {
-    found.push(word);
-  } else {
-    missing.push(word);
-  }
-});
-   
+    jdWords.forEach(word => {
+      if (resumeSet.has(word)) {
+        found.push(word);
+      } else {
+        missing.push(word);
+      }
+    });
 
     const uniqueFound = [...new Set(found)];
     const uniqueMissing = [...new Set(missing)];
 
     const score = ((uniqueFound.length / jdWords.length) * 100).toFixed(2);
 
-    // 🔥 feedback
     let feedback = "";
 
     if (score > 80) {
@@ -120,16 +114,17 @@ jdWords.forEach(word => {
     res.status(500).json({ error: err.message });
   }
 });
-const path = require("path");
 
 
-
-// serve static files from root
-app.use(express.static(path.join(__dirname, "..")));
+// 🔥🔥 FINAL FRONTEND FIX (MOST IMPORTANT)
+app.use(express.static(path.join(__dirname, "../../")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../index.html"));
+  res.sendFile(path.join(__dirname, "../../index.html"));
 });
+
+
+// 🔥 PORT FIX
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
