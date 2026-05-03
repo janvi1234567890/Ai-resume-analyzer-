@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* BODY */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg, #1f4037, #2c5364);
+  color:white;
+}
+
+/* CARD */
+.card{
+  width:420px;
+  padding:40px;
+  border-radius:20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* TITLE */
+h1{
+  margin-bottom:10px;
+}
+
+.subtitle{
+  opacity:0.7;
+  margin-bottom:25px;
+}
+
+/* INPUTS */
+input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  border:none;
+  border-radius:10px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:25px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#00e0ff;
+}
+
+/* LINK */
+p{
+  margin-top:15px;
+}
+
+a{
+  color:#00c6ff;
+  text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>Welcome Back</h1>
+  <p class="subtitle">Login to continue analyzing your resume</p>
+
+  <input type="email" placeholder="Email Address">
+  <input type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <p>Don't have an account? <a href="signup.html">Signup</a></p>
+
+</div>
+
+<script>
+function login(){
+  window.location.href = "analyzer.html";
+}
+</script>
+
+</body>
+</html>

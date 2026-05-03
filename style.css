@@ -1,0 +1,159 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* BODY */
+body{
+  background: linear-gradient(135deg, #1f4037, #2c5364);
+  color:white;
+}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 60px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:600;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:#ddd;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#00f2fe;
+}
+
+/* HERO */
+.hero{
+  height:75vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+  animation: fadeIn 1.2s ease;
+}
+
+.hero h1{
+  font-size:50px;
+  font-weight:700;
+}
+
+.hero p{
+  margin-top:15px;
+  font-size:18px;
+  opacity:0.85;
+}
+
+/* BUTTONS */
+.hero-btns{
+  margin-top:25px;
+}
+
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:25px;
+  font-size:15px;
+  cursor:pointer;
+  margin:12px;
+  transition:0.3s;
+}
+
+/* PRIMARY BUTTON */
+.primary{
+  background:#00c6ff;
+  color:white;
+}
+
+.primary:hover{
+  background:#00e0ff;
+  transform:scale(1.05);
+}
+
+/* OUTLINE BUTTON */
+.outline{
+  border:2px solid #00c6ff;
+  background:transparent;
+  color:#00c6ff;
+}
+
+.outline:hover{
+  background:#00c6ff;
+  color:black;
+}
+
+/* FEATURES */
+.features{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  padding:40px 20px;
+  flex-wrap:wrap;
+}
+
+.feature-card{
+  background:rgba(255,255,255,0.12);
+  padding:20px;
+  border-radius:15px;
+  width:220px;
+  text-align:center;
+  transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.feature-card:hover{
+  transform:translateY(-8px);
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h1{
+    font-size:35px;
+  }
+
+  .navbar{
+    padding:15px 20px;
+  }
+
+  .nav-links{
+    gap:15px;
+  }
+  
+}
