@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Resume Analyzer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background: linear-gradient(135deg, #1f4037, #2c5364);
+  color:white;
+}
+
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 50px;
+  background:rgba(255,255,255,0.08);
+}
+
+.container{
+  max-width:700px;
+  margin:50px auto;
+  text-align:center;
+}
+
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#00c6ff;
+  color:white;
+  cursor:pointer;
+}
+
+.loader{
+  display:none;
+  margin-top:15px;
+}
+
+.circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:conic-gradient(#00c6ff 0%, #ddd 0%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:20px auto;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.progress{
+  width:100%;
+  height:12px;
+  background:#ddd;
+  border-radius:20px;
+  margin:15px 0;
+}
+
+.bar{
+  height:100%;
+  width:0%;
+  background:#00c6ff;
+  border-radius:20px;
+  transition:1s;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.12);
+  padding:15px;
+  border-radius:12px;
+  text-align:left;
+}
+
+.card ul{
+  padding-left:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+  <h2>AI Resume</h2>
+  <a href="index.html" style="color:white;">Home</a>
+</nav>
+
+<div class="container">
+
+  <h1>Resume Analyzer</h1>
+
+  <input type="file" id="resume">
+  <textarea id="jd" placeholder="Paste job description..."></textarea>
+
+  <button onclick="analyze()">Analyze</button>
+
+  <p class="loader" id="loader">Analyzing your resume...</p>
+
+  <div class="circle" id="circle">0%</div>
+
+  <div class="progress">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>✅ Skills Found</h3>
+      <ul id="found"></ul>
+    </div>
+
+    <div class="card">
+      <h3>❌ Missing Skills</h3>
+      <ul id="missing"></ul>
+    </div>
+
+    <div class="card">
+      <h3>💡 Suggestions</h3>
+      <p id="feedback"></p>
+    </div>
+
+  </div>
+
+</div>
+<script>
+
+async function analyze(){
+
+  console.log("clicked");
+
+  let file = document.getElementById("resume").files[0];
+  let jd = document.getElementById("jd").value;
+
+  if(!file || !jd){
+    alert("Upload resume & enter JD");
+    return;
+  }
+
+  let loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+  let formData = new FormData();
+  formData.append("resume", file);
+  formData.append("jd", jd);
+
+  try{
+
+    let res = await fetch("http://127.0.0.1:5000/analyze", {
+      method: "POST",
+      body: formData
+    });
+
+    let data = await res.json();
+    console.log(data);
+
+    loader.style.display = "none";
+
+   let score = parseFloat(data.score) || 0;
+    let circle = document.getElementById("circle");
+    circle.innerText = score + "%";
+    circle.style.background =
+      `conic-gradient(#00c6ff ${score}%, #ddd ${score}%)`;
+
+    let bar = document.getElementById("bar");
+    bar.style.width = score + "%";
+
+   document.getElementById("found").innerHTML =
+  data.found.length
+    ? data.found.map(s => `<li style="color:#00ff9f">${s}</li>`).join("")
+    : "<li>No matching skills</li>";
+
+document.getElementById("missing").innerHTML =
+  data.missing.length
+    ? data.missing.map(s => `<li style="color:#ff4d4d">${s}</li>`).join("")
+    : "<li>No missing skills 🎉</li>";
+    document.getElementById("feedback").innerText = data.feedback;
+
+  }catch(err){
+    loader.style.display = "none";
+    console.log(err);
+    alert("Server error!");
+  }
+
+}
+
+</script>
+
+</body>
+</html>

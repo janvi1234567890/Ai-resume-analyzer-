@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* BODY */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg, #1f4037, #2c5364);
+  color:white;
+}
+
+/* CARD */
+.card{
+  width:420px;
+  padding:40px;
+  border-radius:20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* TITLE */
+h1{
+  margin-bottom:10px;
+}
+
+.subtitle{
+  opacity:0.7;
+  margin-bottom:25px;
+}
+
+/* INPUTS */
+input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  border:none;
+  border-radius:10px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:25px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* LINK */
+p{
+  margin-top:15px;
+}
+
+a{
+  color:#00c6ff;
+  text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>Create Account</h1>
+  <p class="subtitle">Join us and analyze your resume smartly</p>
+
+  <input type="text" placeholder="Full Name">
+  <input type="email" placeholder="Email Address">
+  <input type="password" placeholder="Password">
+
+  <button onclick="signup()">Signup</button>
+
+  <p>Already have an account? <a href="login.html">Login</a></p>
+
+</div>
+
+<script>
+function signup(){
+  alert("Account created!");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
