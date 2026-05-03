@@ -122,10 +122,13 @@ jdWords.forEach(word => {
 });
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "../frontend")));
+
+
+// serve static files from root
+app.use(express.static(path.join(__dirname, "..")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
